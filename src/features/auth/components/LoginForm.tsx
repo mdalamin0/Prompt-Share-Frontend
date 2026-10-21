@@ -1,25 +1,28 @@
 "use client";
 
 import { useForm } from "@tanstack/react-form";
+import { useQueryClient } from "@tanstack/react-query";
 import { Eye, EyeOff, LockKeyhole, Mail, Sparkles } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import type { FetchError } from "ofetch";
+import { useEffect, useState } from "react";
+
+import { toast } from "sonner";
+import Logo from "@/components/shared/Logo";
+import { Button } from "@/components/ui/button";
 import {
   Field,
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { loginSchema } from "../auth.schema";
-
-import { toast } from "sonner";
 import { Spinner } from "@/components/ui/spinner";
-import { useRouter } from "next/navigation";
-import { FetchError } from "ofetch";
-import { useQueryClient } from "@tanstack/react-query";
-import { useState } from "react";
-import Logo from "@/components/shared/Logo";
+import { loginSchema } from "../auth.schema";
+import type { ApiResponse, User } from "../auth.types";
 import { useLogin } from "../hooks/auth.hooks";
+import GoogleLoginButton from "./GoogleLogin";
 
 const demoAccount = {
   email: "nasima7485@gmail.com",
@@ -30,6 +33,7 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false);
   const router = useRouter();
   const { mutate: login, isPending: loginPending } = useLogin();
+  const searchParams = useSearchParams();
   const queryClient = useQueryClient();
 
   const form = useForm({
@@ -55,9 +59,13 @@ const LoginForm = () => {
             return;
           }
 
-          queryClient.setQueryData(["user"], res.data?.user);
+          queryClient.setQueryData<ApiResponse<User>>(["user"], {
+            success: true,
+            message: res.message,
+            data: res.data?.user,
+          });
           toast.success(res.message || "Logged in successfully!");
-          router.replace("/dashboard");
+          router.replace("/dashboard/user");
         },
         onError: (error: FetchError) => {
           const errorMessage =
@@ -73,8 +81,21 @@ const LoginForm = () => {
     form.setFieldValue("password", demoAccount.password);
   };
 
+    useEffect(() => {
+      const error = searchParams.get("error");
+
+      if (error === "google-login-failed") {
+        toast.error("Google login is only available for User.", {
+          description: "Please login with email and password.",
+          id: "google-login-error",
+        });
+
+        window.history.replaceState(null, "", "/login");
+      }
+    }, [searchParams]);
+
   return (
-    <div className="w-full max-w-md bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-900 p-5 md:p-8  shadow-sm dark:shadow-xl">
+    <div className="w-full rounded-2xl max-w-md bg-white dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-900 p-5 md:p-8  shadow-sm dark:shadow-xl">
       <div className="mb-7 flex flex-col items-center justify-center">
         <div className="mb-4">
           <Logo />
@@ -225,6 +246,11 @@ const LoginForm = () => {
                 "Sign In"
               )}
             </Button>
+          </Field>
+          <FieldSeparator>Or continue with</FieldSeparator>
+
+          <Field>
+            <GoogleLoginButton />
           </Field>
         </FieldGroup>
       </form>
