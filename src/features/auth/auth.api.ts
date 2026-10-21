@@ -1,5 +1,5 @@
 import apiClient from "@/lib/apiClient";
-import { LoginUserPayload, RegisterUserPayload, resendVerificationPayload, resetPasswordPayload, VerifyEmailPayload } from "./auth.types";
+import type { ApiResponse, LoginResponseData, LoginUserPayload, RegisterUserPayload, resendVerificationPayload, resetPasswordPayload, User, VerifyEmailPayload } from "./auth.types";
 
 export const userRegister = (payload: RegisterUserPayload) => {
   return apiClient("/auth/register",{
@@ -9,7 +9,7 @@ export const userRegister = (payload: RegisterUserPayload) => {
 };
 
 export const userLogin = (payload: LoginUserPayload) => {
-  return apiClient("/auth/login", {
+  return apiClient<ApiResponse<LoginResponseData>>("/auth/login", {
     method: "POST",
     body: payload,
   });
@@ -29,13 +29,13 @@ export const resendVerficationCode = (payload: resendVerificationPayload) => {
   });
 };
 
-// export const getMe = () => {
-//   return apiClient("/users/me");
-// };
+export const getMe = () => {
+  return apiClient<ApiResponse<User>>("/auth/me");
+};
 
-// export function userLogout() {
-//   return apiClient("/auth/logout", { method: "POST" });
-// }
+export function userLogout() {
+  return apiClient("/auth/logout", { method: "POST" });
+}
 
 export const forgotPassword = (email: string) => {
   return apiClient("/auth/forgot-password", {

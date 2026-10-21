@@ -8,6 +8,7 @@ import {
   FieldError,
   FieldGroup,
   FieldLabel,
+  FieldSeparator,
 } from "@/components/ui/field";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
@@ -20,6 +21,7 @@ import { Spinner } from "@/components/ui/spinner";
 import Logo from "@/components/shared/Logo";
 import { useRegister } from "../hooks/auth.hooks";
 import { UserRole } from "../auth.types";
+import GoogleLoginButton from "./GoogleLogin";
 
 const RegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false);
@@ -224,6 +226,11 @@ const RegisterForm = () => {
                 "Sign Up"
               )}
             </Button>
+          </Field>
+          <FieldSeparator>Or continue with</FieldSeparator>
+
+          <Field>
+            <GoogleLoginButton />
           </Field>
         </FieldGroup>
       </form>

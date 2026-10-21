@@ -3,24 +3,59 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, Terminal, LayoutDashboard, LogIn } from "lucide-react";
+import {
+  Menu,
+  X,
+  Terminal,
+  LogIn,
+  Home,
+  UserPlus,
+  LogOut,
+  LayoutDashboard,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "../shared/Logo";
 import ThemeToggle from "../shared/ThemeToggle";
-
+import { useGetMe, useLogout } from "../../features/auth/hooks/auth.hooks";
+import { useQueryClient } from "@tanstack/react-query";
+import { UserRole, UserRoleType } from "@/features/auth/auth.types";
+import { toast } from "sonner";
+import { useAuthLogout } from "@/features/auth/hooks/useAuthLogout";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { data, isLoading } = useGetMe();
+  const { mutate: logout } = useLogout();
+  const queryClient = useQueryClient();
 
-  const navLinks = [
-    { name: "Explore", href: "/", icon: Terminal },
-    { name: "Dashboard", href: "/dashboard", icon: LayoutDashboard },
+  const user = data?.data;
+  const role = user?.role as UserRoleType | undefined;
+
+  const dashboardRoute =
+    role === UserRole.USER
+      ? "/dashboard/user"
+      : role === UserRole.ADMIN
+        ? "/dashboard/admin"
+        : "/";
+
+  const baseLinks = [
+    { name: "Home", href: "/", icon: Home },
+    { name: "Explore Prompts", href: "/prompts", icon: Terminal },
   ];
 
+  const navLinks = user
+    ? [
+        ...baseLinks,
+        { name: "Dashboard", href: dashboardRoute, icon: LayoutDashboard },
+      ]
+    : baseLinks;
+
+const { handleLogout } = useAuthLogout();
+
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 dark:bg-zinc-950/80 backdrop-blur-md border-b border-zinc-200 dark:border-zinc-800 transition-colors duration-200">
-      <div className="container-app ">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-200 text-foreground">
+      <div className="container-app">
         <div className="flex h-16 items-center justify-between">
           <div className="flex items-center gap-8">
             <Logo />
@@ -35,10 +70,10 @@ export default function Navbar() {
                     variant={isActive ? "secondary" : "ghost"}
                     nativeButton={false}
                     render={<Link href={link.href} />}
-                    className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium  transition-all ${
+                    className={`flex items-center gap-1.5 px-4 py-2 text-sm font-medium transition-all ${
                       isActive
-                        ? "text-purple-600 dark:text-purple-400"
-                        : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+                        ? "text-primary"
+                        : "text-muted-foreground hover:text-foreground"
                     }`}
                   >
                     <Icon size={16} />
@@ -52,16 +87,42 @@ export default function Navbar() {
           <div className="hidden md:flex items-center gap-4">
             <ThemeToggle />
 
-            <Button
-              variant="outline"
-              size="default"
-              nativeButton={false}
-              render={<Link href="/login" />}
-              className=" border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 font-medium text-sm flex items-center gap-1.5"
-            >
-              <LogIn size={16} />
-              Login
-            </Button>
+            {isLoading ? (
+              <div className="h-9 w-24 bg-muted/60 rounded-full animate-pulse" />
+            ) : user ? (
+              <Button
+                variant="outline"
+                size="default"
+                onClick={() => handleLogout(() => setIsMobileMenuOpen(false))}
+                className="border-border text-destructive hover:bg-destructive/10 font-medium text-sm flex items-center gap-1.5"
+              >
+                <LogOut size={16} />
+                Logout
+              </Button>
+            ) : (
+              <div className="flex items-center gap-2">
+                <Button
+                  variant="outline"
+                  size="default"
+                  nativeButton={false}
+                  render={<Link href="/login" />}
+                  className="text-foreground font-medium text-sm flex items-center gap-1.5"
+                >
+                  <LogIn size={16} />
+                  Login
+                </Button>
+                <Button
+                  variant="default"
+                  size="default"
+                  nativeButton={false}
+                  render={<Link href="/register" />}
+                  className="bg-primary text-primary-foreground font-medium text-sm flex items-center gap-1.5 shadow-sm shadow-primary/10"
+                >
+                  <UserPlus size={16} />
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </div>
 
           <div className="flex items-center gap-2 md:hidden">
@@ -70,7 +131,7 @@ export default function Navbar() {
               variant="ghost"
               size="icon"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-zinc-600 dark:text-zinc-400"
+              className="text-muted-foreground hover:text-foreground"
             >
               {isMobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
             </Button>
@@ -79,7 +140,7 @@ export default function Navbar() {
       </div>
 
       {isMobileMenuOpen && (
-        <div className="md:hidden border-b border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 px-4 pt-2 pb-4 space-y-1 animate-in fade-in slide-in-from-top-5 duration-200">
+        <div className="md:hidden border-b border-border bg-card px-4 pt-2 pb-4 space-y-1 animate-in fade-in slide-in-from-top-5 duration-200">
           {navLinks.map((link) => {
             const Icon = link.icon;
             const isActive = pathname === link.href;
@@ -90,10 +151,10 @@ export default function Navbar() {
                 nativeButton={false}
                 render={<Link href={link.href} />}
                 onClick={() => setIsMobileMenuOpen(false)}
-                className={`w-full justify-start flex items-center gap-2 px-4 py-3 text-base font-medium  transition-all ${
+                className={`w-full justify-start flex items-center gap-2 px-4 py-3 text-base font-medium transition-all ${
                   isActive
-                    ? "text-purple-600 dark:text-purple-400"
-                    : "text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-200"
+                    ? "text-primary"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 <Icon size={18} />
@@ -101,17 +162,43 @@ export default function Navbar() {
               </Button>
             );
           })}
-          <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 mt-2">
-            <Button
-              variant="outline"
-              nativeButton={false}
-              render={<Link href="/login" />}
-              onClick={() => setIsMobileMenuOpen(false)}
-              className="w-full  border-zinc-200 dark:border-zinc-800 text-zinc-800 dark:text-zinc-200 font-medium py-2.5 flex items-center justify-center gap-1.5"
-            >
-              <LogIn size={18} />
-              Login
-            </Button>
+
+          <div className="pt-4 border-t border-border mt-2">
+            {isLoading ? (
+              <div className="h-10 w-full bg-muted/60 rounded-full animate-pulse" />
+            ) : user ? (
+              <Button
+                variant="outline"
+                onClick={() => handleLogout(() => setIsMobileMenuOpen(false))}
+                className="w-full border-border text-destructive hover:bg-destructive/10 font-medium py-2.5 flex items-center justify-center gap-1.5"
+              >
+                <LogOut size={18} />
+                Logout
+              </Button>
+            ) : (
+              <div className="flex flex-col gap-2 w-full">
+                <Button
+                  variant="outline"
+                  nativeButton={false}
+                  render={<Link href="/login" />}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full border-border text-foreground font-medium py-2.5 flex items-center justify-center gap-1.5"
+                >
+                  <LogIn size={18} />
+                  Login
+                </Button>
+                <Button
+                  variant="default"
+                  nativeButton={false}
+                  render={<Link href="/register" />}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full bg-primary text-primary-foreground font-medium py-2.5 flex items-center justify-center gap-1.5"
+                >
+                  <UserPlus size={18} />
+                  Sign Up
+                </Button>
+              </div>
+            )}
           </div>
         </div>
       )}
