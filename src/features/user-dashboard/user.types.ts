@@ -5,13 +5,17 @@ export interface IDashboardStats {
   totalForksReceived: number;
 }
 
+export type categoryType = "code" | "text" | "image";
 
 export interface IPrompt {
   id: string;
   title: string;
-  category: string;
-  views?: number;
+  description: string;
+  template: string;
+  category: categoryType;
+  tags: string[];
   isPublic: boolean;
+  forkCount: number;
   createdAt: string;
 }
 
@@ -25,4 +29,13 @@ export interface IMeta {
 export interface PaginatedResponse<T> {
   data: T[];
   meta: IMeta;
+}
+
+export interface PromptParams {
+  page?: number;
+  limit?: number;
+  searchTerm?: string;
+  sortOrder?: "desc" | "asc";
+  sortBy?: "createdAt";
+  category?: categoryType;
 }
