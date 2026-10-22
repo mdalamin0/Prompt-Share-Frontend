@@ -14,7 +14,7 @@ export default function UserDashboard() {
   const { data: statsResponse, isPending: statsPending } = useDashboardStats();
   const stats = statsResponse?.data;
 
-  const { data: promptsResponse, isPending: promptsPending } = useMyPrompts();
+  const { data: promptsResponse, isPending: promptsPending } = useMyPrompts({sortBy: "createdAt", sortOrder: "desc"});
   const prompts = promptsResponse?.data?.data || [];
 console.log(statsResponse?.data);
 

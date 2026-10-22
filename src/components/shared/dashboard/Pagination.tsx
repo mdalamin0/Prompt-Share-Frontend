@@ -1,0 +1,114 @@
+import { Dispatch, SetStateAction } from "react";
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+type PaginationItemType = number | "ellipsis-start" | "ellipsis-end";
+
+const getButtonArray = (
+  totalPages: number,
+  page: number,
+): PaginationItemType[] => {
+  if (totalPages <= 7) {
+    return Array.from({ length: totalPages }, (_, index) => index + 1);
+  }
+
+  if (page <= 4) {
+    return [1, 2, 3, 4, 5, "ellipsis-end", totalPages];
+  }
+
+  if (page >= totalPages - 3) {
+    return [
+      1,
+      "ellipsis-start",
+      totalPages - 4,
+      totalPages - 3,
+      totalPages - 2,
+      totalPages - 1,
+      totalPages,
+    ];
+  }
+
+  return [
+    1,
+    "ellipsis-start",
+    page - 1,
+    page,
+    page + 1,
+    "ellipsis-end",
+    totalPages,
+  ];
+};
+
+interface Props {
+  totalPages: number;
+  handlePageChange: Dispatch<SetStateAction<number>>;
+  page: number;
+}
+
+export default function TablePagination({
+  totalPages,
+  handlePageChange,
+  page,
+}: Props) {
+  const goToPage = (nextPage: number) => {
+    handlePageChange(nextPage);
+  };
+
+  if (totalPages <= 1) {
+    return null;
+  }
+
+  return (
+    <Pagination>
+      <PaginationContent>
+        <PaginationItem>
+          <PaginationPrevious
+            onClick={() => goToPage(page - 1)}
+            aria-disabled={page === 1}
+            className={
+              page === 1 ? "pointer-events-none opacity-50" : undefined
+            }
+          />
+        </PaginationItem>
+
+        {getButtonArray(totalPages, page).map((item) => {
+          if (item === "ellipsis-start" || item === "ellipsis-end") {
+            return (
+              <PaginationItem key={item}>
+                <PaginationEllipsis />
+              </PaginationItem>
+            );
+          }
+
+          return (
+            <PaginationItem key={item}>
+              <PaginationLink
+                onClick={() => handlePageChange(item)}
+                isActive={page === item}
+              >
+                {item}
+              </PaginationLink>
+            </PaginationItem>
+          );
+        })}
+
+        <PaginationItem>
+          <PaginationNext
+            onClick={() => goToPage(page + 1)}
+            aria-disabled={page === totalPages}
+            className={
+              page === totalPages ? "pointer-events-none opacity-50" : undefined
+            }
+          />
+        </PaginationItem>
+      </PaginationContent>
+    </Pagination>
+  );
+}
