@@ -16,7 +16,7 @@ export default function UserDashboard() {
 
   const { data: promptsResponse, isPending: promptsPending } = useMyPrompts({sortBy: "createdAt", sortOrder: "desc"});
   const prompts = promptsResponse?.data?.data || [];
-console.log(statsResponse?.data);
+
 
   return (
     <div className="container-app  w-full block">
@@ -37,7 +37,7 @@ console.log(statsResponse?.data);
       ) : (
         <DashboardOverviewAddon
           prompts={prompts}
-          totalPrompts={promptsResponse?.data?.meta.totalPages || 0}
+          totalPrompts={promptsResponse?.data?.meta.total || 0}
         />
       )}
     </div>

@@ -1,5 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { createPrompt, deletePrompt, getDashboardStats, getMyPrompts } from "../user.api";
+import { createPrompt, deletePrompt, getDashboardStats, getMyPrompts, getPromptById, updatePrompt } from "../user.api";
 import { PromptParams } from "../user.types";
 
 export const useDashboardStats = () => {
@@ -19,6 +19,17 @@ export const useMyPrompts = (params: PromptParams) => {
   });
 };
 
+
+export const useSinglePrompt = (id: string) => {
+  return useQuery({
+    queryKey: ["my-prompt", id],
+    queryFn: () => getPromptById(id),
+    enabled: !!id,
+    staleTime: 0, 
+  });
+};
+
+
 export const useCreatePrompt = () => {
   const queryClient = useQueryClient();
   return useMutation({
@@ -26,6 +37,18 @@ export const useCreatePrompt = () => {
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ["prompts"] });
       queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+    },
+  });
+};
+
+export const useUpdatePrompt = () => {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: updatePrompt,
+    onSuccess: (_, variables) => {
+      queryClient.invalidateQueries({ queryKey: ["prompts"] });
+      queryClient.invalidateQueries({ queryKey: ["dashboard-stats"] });
+      queryClient.invalidateQueries({ queryKey: ["my-prompt", variables.id] });
     },
   });
 };
