@@ -46,6 +46,6 @@ export interface PromptParams {
   limit?: number;
   searchTerm?: string;
   sortOrder?: "desc" | "asc";
-  sortBy?: "createdAt";
+  sortBy?: string;
   category?: categoryType;
 }
