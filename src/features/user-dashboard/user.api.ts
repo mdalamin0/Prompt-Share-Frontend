@@ -17,9 +17,31 @@ export const getMyPrompts = (params: PromptParams) => {
   );
 };
 
+export const getPromptById = (id: string) => {
+  return apiClient<ApiResponse<IPromptFormData>>(
+    `/prompt/${id}`,
+    {
+      method: "GET",
+    },
+  );
+};
+
 export const createPrompt = (payload: IPromptFormData) => {
   return apiClient<ApiResponse<IPromptFormData>>("/prompt/create", {
     method: "POST",
+    body: payload,
+  });
+};
+
+export const updatePrompt = ({
+  id,
+  payload,
+}: {
+  id: string;
+  payload: IPromptFormData;
+}) => {
+  return apiClient<ApiResponse<IPromptFormData>>(`/prompt/${id}`, {
+    method: "PATCH",
     body: payload,
   });
 };

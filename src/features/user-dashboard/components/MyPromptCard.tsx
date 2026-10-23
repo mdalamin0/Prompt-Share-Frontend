@@ -15,6 +15,7 @@ import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { IPrompt } from "../user.types";
 import { useDeletePrompt } from "../hooks/user.hooks";
+import Link from "next/link";
 
 interface MyPromptCardProps {
   prompt: IPrompt;
@@ -131,13 +132,15 @@ const handleDeletePrompt = () => {
         {/* Modify & Management Action Buttons */}
         <div className="flex items-center gap-1">
           <Button
-            variant="ghost"
-            size="icon"
-            className="size-8 text-muted-foreground hover:text-foreground hover:bg-accent"
-            aria-label="Edit prompt"
-          >
-            <Edit3 size={14} />
-          </Button>
+              variant="ghost"
+              size="icon"
+              nativeButton={false} 
+              render={<Link href={`/dashboard/user/my-prompts/edit/${prompt.id}`} />}
+              className="size-8 text-muted-foreground hover:text-foreground hover:bg-accent"
+              aria-label="Edit prompt"
+            >
+              <Edit3 size={14} />
+            </Button>
           <Button
             variant="ghost"
             size="icon"

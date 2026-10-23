@@ -102,7 +102,7 @@ const getCategoryIcon = (category: string) => {
                         {prompt.isPublic ? "Public" : "Private"}
                       </span>
                       <div className="flex items-center gap-1 text-xs text-muted-foreground min-w-12 justify-end">
-                        <Eye size={12} /> {prompt.views || 0}
+                        <Eye size={12} /> {prompt.forkCount || 0}
                       </div>
                     </div>
                   </div>
