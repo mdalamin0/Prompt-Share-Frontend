@@ -9,10 +9,12 @@ import {
   Edit3,
   Trash2,
   Copy,
+  Loader2,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { toast } from "sonner";
 import { IPrompt } from "../user.types";
+import { useDeletePrompt } from "../hooks/user.hooks";
 
 interface MyPromptCardProps {
   prompt: IPrompt;
@@ -27,6 +29,7 @@ export default function MyPromptCard({ prompt }: MyPromptCardProps) {
   };
 
   const Icon = getCategoryIcon(prompt.category);
+  const {mutate: deletePrompt, isPending: isDeleting } = useDeletePrompt();
 
   const handleCopyTemplate = async () => {
     try {
@@ -35,6 +38,17 @@ export default function MyPromptCard({ prompt }: MyPromptCardProps) {
     } catch {
       toast.error("Failed to copy template. Please try again.");
     }
+  };
+
+const handleDeletePrompt = () => {
+      deletePrompt(prompt.id, {
+        onSuccess: () => {
+          toast.success("Prompt deleted successfully!");
+        },
+        onError: () => {
+          toast.error("Failed to delete prompt. Please try again.");
+        }
+      });
   };
 
   return (
@@ -129,8 +143,10 @@ export default function MyPromptCard({ prompt }: MyPromptCardProps) {
             size="icon"
             className="size-8 text-destructive hover:text-destructive hover:bg-destructive/10"
             aria-label="Delete prompt"
+            disabled={isDeleting}
+            onClick={handleDeletePrompt}
           >
-            <Trash2 size={14} />
+            {isDeleting ? <Loader2 size={14} className="animate-spin" /> : <Trash2 size={14} />}
           </Button>
         </div>
       </div>
