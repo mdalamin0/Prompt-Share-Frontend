@@ -1,6 +1,6 @@
 import apiClient from "@/lib/apiClient";
 import { ApiResponse } from "../auth/auth.types";
-import { IDashboardStats, IPrompt, PaginatedResponse, PromptParams } from "./user.types";
+import { IDashboardStats, IPrompt, IPromptFormData, PaginatedResponse, PromptParams } from "./user.types";
 
 export const getDashboardStats = () => {
   return apiClient<ApiResponse<IDashboardStats>>("prompt/dashboard-stats", {
@@ -16,4 +16,17 @@ export const getMyPrompts = (params: PromptParams) => {
     },
   );
 };
+
+export const createPrompt = (payload: IPromptFormData) => {
+  return apiClient<ApiResponse<IPromptFormData>>("/prompt/create", {
+    method: "POST",
+    body: payload,
+  });
+};
+
+export const deletePrompt = (promptId: string) => {
+  return apiClient(`/prompt/${promptId}`, {
+    method: "DELETE",
+  });
+}
 

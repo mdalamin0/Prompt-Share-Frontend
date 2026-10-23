@@ -13,6 +13,7 @@ import { Button } from "@/components/ui/button";
 import MyPromptCard from "@/features/user-dashboard/components/MyPromptCard";
 import MyPromptCardSkeleton from "@/features/user-dashboard/components/MyPromptCardSkeleton";
 import MyPromptCardError from "@/features/user-dashboard/components/MyPromptCardError";
+import Link from "next/link";
 
 
 const categoryTabs = [
@@ -62,7 +63,10 @@ const MyPromptsPage = () => {
             title="My Prompts"
             description="View, manage, and edit the AI prompt templates created by you."
           />
-          <Button type="button" onClick={() => {}}>
+          <Button
+            nativeButton={false}
+            render={<Link href="/dashboard/user/my-prompts/create" />}
+          >
             <Plus className=" size-4" />
             Create Prompt
           </Button>
@@ -99,7 +103,10 @@ const MyPromptsPage = () => {
                 }
                 actionLabel="Create Prompt"
                 onAction={() => (
-                  <Button type="button" onClick={() => {}}>
+                  <Button
+                    nativeButton={false}
+                    render={<Link href="/dashboard/user/my-prompts/create" />}
+                  >
                     <Plus className="mr-2 size-4" />
                     Create Prompt
                   </Button>

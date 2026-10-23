@@ -5,7 +5,17 @@ export interface IDashboardStats {
   totalForksReceived: number;
 }
 
+
 export type categoryType = "code" | "text" | "image";
+
+export interface IPromptFormData {
+  title: string;
+  description: string;
+  template: string;
+  category: categoryType;
+  tags: string[];
+  isPublic: boolean;
+}
 
 export interface IPrompt {
   id: string;
