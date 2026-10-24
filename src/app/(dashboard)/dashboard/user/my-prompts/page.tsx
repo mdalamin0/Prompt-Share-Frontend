@@ -14,6 +14,7 @@ import MyPromptCard from "@/features/user-dashboard/components/MyPromptCard";
 import MyPromptCardSkeleton from "@/features/user-dashboard/components/MyPromptCardSkeleton";
 import MyPromptCardError from "@/features/user-dashboard/components/MyPromptCardError";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 
 const categoryTabs = [
@@ -28,6 +29,7 @@ const MyPromptsPage = () => {
   const [page, setPage] = useState(1);
   const debouncedSearch = useDebounce(search);
   const [tab, setTab] = useState<"ALL" | "code" | "text" | "image">("ALL");
+  const router = useRouter();
 
   const queryParams = {
     page,
@@ -101,16 +103,12 @@ const MyPromptsPage = () => {
                     ? "No prompts match your current search or category filter."
                     : "You haven't created any prompt templates in your workspace yet."
                 }
-                actionLabel="Create Prompt"
-                onAction={() => (
-                  <Button
-                    nativeButton={false}
-                    render={<Link href="/dashboard/user/my-prompts/create" />}
-                  >
-                    <Plus className="mr-2 size-4" />
-                    Create Prompt
-                  </Button>
-                )}
+                actionLabel={
+                  search || tab !== "ALL" ? undefined : "Create Prompt"
+                }
+                onAction={() =>
+                  router.push("/dashboard/user/my-prompts/create")
+                }
               />
             </div>
           ) : (

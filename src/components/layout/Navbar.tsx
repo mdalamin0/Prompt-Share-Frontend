@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import  { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -12,22 +12,21 @@ import {
   UserPlus,
   LogOut,
   LayoutDashboard,
+  Info,
+  HelpCircle,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "../shared/Logo";
 import ThemeToggle from "../shared/ThemeToggle";
-import { useGetMe, useLogout } from "../../features/auth/hooks/auth.hooks";
-import { useQueryClient } from "@tanstack/react-query";
+import { useGetMe } from "../../features/auth/hooks/auth.hooks";
 import { UserRole, UserRoleType } from "@/features/auth/auth.types";
-import { toast } from "sonner";
+
 import { useAuthLogout } from "@/features/auth/hooks/useAuthLogout";
 
 export default function Navbar() {
   const pathname = usePathname();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const { data, isLoading } = useGetMe();
-  const { mutate: logout } = useLogout();
-  const queryClient = useQueryClient();
 
   const user = data?.data;
   const role = user?.role as UserRoleType | undefined;
@@ -42,6 +41,7 @@ export default function Navbar() {
   const baseLinks = [
     { name: "Home", href: "/", icon: Home },
     { name: "Explore Prompts", href: "/prompts", icon: Terminal },
+    { name: "Faq", href: "/faq", icon: HelpCircle }
   ];
 
   const navLinks = user
