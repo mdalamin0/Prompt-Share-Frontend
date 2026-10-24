@@ -65,7 +65,13 @@ const LoginForm = () => {
             data: res.data?.user,
           });
           toast.success(res.message || "Logged in successfully!");
-          router.replace("/dashboard/user");
+           const nextTarget = searchParams.get("next");
+
+           if (nextTarget) {
+             router.push(decodeURIComponent(nextTarget));
+           } else {
+             router.push("/dashboard/user");
+           }
         },
         onError: (error: FetchError) => {
           const errorMessage =

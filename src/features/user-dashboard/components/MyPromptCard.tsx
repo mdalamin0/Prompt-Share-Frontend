@@ -88,7 +88,6 @@ const handleDeletePrompt = () => {
           {prompt.description}
         </p>
 
-        {/* Fixed Template Window with Permanent Copy Button */}
         <div className="relative rounded-lg overflow-hidden mb-4 border border-border/40 bg-muted/30">
           <div className="p-4 font-mono text-[11px] text-muted-foreground line-clamp-3 select-none leading-relaxed pr-12 pb-5 whitespace-pre-wrap">
             {prompt.template}
