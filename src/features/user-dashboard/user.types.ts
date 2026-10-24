@@ -26,6 +26,7 @@ export interface IPrompt {
   tags: string[];
   isPublic: boolean;
   forkCount: number;
+  isForkedByCurrentUser: boolean;
   createdAt: string;
 }
 
