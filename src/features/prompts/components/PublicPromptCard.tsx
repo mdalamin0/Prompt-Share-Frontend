@@ -96,7 +96,7 @@ export default function PublicPromptCard({ prompt }: PublicPromptCardProps) {
             </div>
           </div>
 
-          <div className="p-2 rounded-full bg-secondary/80 text-primary shrink-0 border border-border/20 flex items-center gap-1">
+          <div className="px-2 py-0.5 rounded-full bg-primary/10 text-primary shrink-0 border border-border/20 flex items-center gap-1">
             <p className="text-xs">{CLavel}</p>
             <Icon size={13} strokeWidth={2.2} />
           </div>
@@ -165,7 +165,7 @@ export default function PublicPromptCard({ prompt }: PublicPromptCardProps) {
           className="h-8 bg-primary hover:bg-primary/90 text-primary-foreground text-xs font-bold px-3 shadow-sm flex items-center gap-1 transition-transform hover:-translate-y-0.5"
         >
           <GitFork size={12} strokeWidth={2.5} />
-          <span>Clone Model</span>
+          <span>Save Prompt</span>
         </Button>
       </div>
     </div>

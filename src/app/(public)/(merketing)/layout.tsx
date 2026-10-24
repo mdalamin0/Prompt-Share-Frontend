@@ -1,3 +1,4 @@
+import Footer from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import React from "react";
 
@@ -7,7 +8,7 @@ const PublicLayout = async ({ children }: { children: React.ReactNode }) => {
     <div className="flex flex-col min-h-screen">
       <Navbar></Navbar>
       <main className="flex-1">{children}</main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 };
