@@ -1,4 +1,4 @@
-import { History, LayoutDashboard, Settings, Terminal, UserRound, Users } from "lucide-react";
+import { History, LayoutDashboard, Settings, Terminal, User, UserRound, Users } from "lucide-react";
 
 export const userRoutes = [
   {
@@ -11,9 +11,14 @@ export const userRoutes = [
     href: "/dashboard/user/my-prompts",
     icon: Terminal,
   },
+   {
+    name: "Profile",
+    href: "/dashboard/user/profile",
+    icon: User,
+  },
   {
     name: "Settings",
-    href: "/dashboard/user/profile",
+    href: "/dashboard/user/settings",
     icon: Settings,
   },
 ];
