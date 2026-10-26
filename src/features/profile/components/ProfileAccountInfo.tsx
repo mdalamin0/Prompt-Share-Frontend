@@ -121,7 +121,7 @@ export default function ProfileAccountInfo({
               </span>
 
               {isEditing ? (
-                <div className="mt-1.5 flex items-center gap-2 w-full max-w-md">
+                <div className="mt-1.5 sm:flex items-center space-y-2 sm:space-y-0 gap-2 w-full max-w-md">
                   <Input
                     type="text"
                     value={updatedName}
@@ -130,31 +130,33 @@ export default function ProfileAccountInfo({
                     className="h-8 text-xs pl-3 w-full"
                     placeholder="Enter profile name"
                   />
-                  <Button
-                    type="button"
-                    onClick={handleSaveName}
-                    disabled={isUpdating}
-                    className="h-8 bg-primary text-primary-foreground text-xs font-bold px-3 shrink-0 flex items-center gap-1 shadow-sm"
-                  >
-                    {isUpdating ? (
-                      <Loader2 size={12} className="animate-spin" />
-                    ) : (
-                      <Save size={12} />
-                    )}
-                    <span>Save</span>
-                  </Button>
-                  <Button
-                    type="button"
-                    variant="outline"
-                    disabled={isUpdating}
-                    onClick={() => {
-                      setIsEditing(false);
-                      setUpdatedName(name);
-                    }}
-                    className="h-8 size-8 border-border bg-transparent text-foreground hover:bg-accent shrink-0 p-0 flex items-center justify-center"
-                  >
-                    <X size={12} />
-                  </Button>
+                  <div className="flex items-center gap-2">
+                    <Button
+                      type="button"
+                      onClick={handleSaveName}
+                      disabled={isUpdating}
+                      className="h-8 bg-primary text-primary-foreground text-xs font-bold px-3 shrink-0 flex items-center gap-1 shadow-sm"
+                    >
+                      {isUpdating ? (
+                        <Loader2 size={12} className="animate-spin" />
+                      ) : (
+                        <Save size={12} />
+                      )}
+                      <span>Save</span>
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      disabled={isUpdating}
+                      onClick={() => {
+                        setIsEditing(false);
+                        setUpdatedName(name);
+                      }}
+                      className="h-8 size-8 border-border bg-transparent text-foreground hover:bg-accent shrink-0 p-0 flex items-center justify-center"
+                    >
+                      <X size={12} />
+                    </Button>
+                  </div>
                 </div>
               ) : (
                 <span className="text-xs font-bold text-foreground block truncate mt-0.5">

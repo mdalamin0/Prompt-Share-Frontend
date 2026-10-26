@@ -1,26 +1,26 @@
-# 📰 PromptShare Hub — Frontend Studio
+# 📰 PromptShare Hub — An AI Prompt Engineering & Management Studio Platform.
 
-PromptShare Hub is an ultra-modern, professional SaaS prompt engineering workspace and public marketplace. It allows AI engineers and developers to cloud-host production-ready prompt matrices, inject modular dynamic variables, clone masterpieces via a seamless open forking mechanism, and organize engineering assets with zero setup latency. The platform delivers an elite user experience with complete reactive states, strict type-safety, and seamless public routing.
+PromptShare Hub is an ultra-modern, professional SaaS prompt engineering workspace and public marketplace. It empowers AI developers to cloud-host production-ready prompt matrices, inject dynamic schema parameters, clone masterpieces instantly, and execute live testing prompts through a centralized, high-speed OpenAI production pipeline. The entire platform delivers an elite user experience backed by strict type-safety, absolute reactive synchronization, and zero-config public routing.
 
 ## 🌐 Live Demo & Links
-- 🚀 **Live Website:** https://promptshare-hub.vercel.app
+- 🚀 **Live Website:** https://prompt-share-frontend.vercel.app
 - 📂 **Backend Repository:** https://github.com/mdalamin0/Prompt-Share-Backend
 
 # 🛠️ Main Technologies
 - Next.js (App Router Configuration)
-- TanStack Query
-- TanStack Form
-- Zod Validation Suite
-- Tailwind CSS
-- Lucide React
+- TanStack Query (State & Cache Synchronization)
+- TanStack Form & Zod (Bulletproof Validation Suite)
+- Tailwind CSS (Premium SaaS Interface Design)
+- Lucide React (Visual Indicator Assets)
 
 # ✨ Key Features
-- 🚀 **Dynamic Prompt Reusability Studio:** Real-time token detection engine parsing double curly braces `{{variable}}` syntax with one-click cursor context injections.
-- 🔐 **Granular Release Controls:** Toggle prompt models between private database slots and global public stream discovery.
-- 📋 **Seamless Comma-Separated Tag Clusters:** Simple text input architecture splitting tag arrays instantly on submission with Zod pipeline integration.
-- 🛡️ **Intelligent Redirect Memory Funnel:** Secured action triggers that capture non-authenticated client pathways and route users back natively after sign-in.
-- 🎨 **SaaS Luxury Aesthetics:** Fully responsive layout modules matching deep-tech dark windows, dynamic blur glass skeletons, and high-visibility 404 console tracking views.
-- 📱 **Adaptive UI Layouts:** Engineered with strict box-bounding principles ensuring 100% device fluidity down to 320px screens.
+- ⚡ **Live Real-API Sandbox Playground:** One-click integration with an official live AI inference engine (OpenAI GROQ-qwen/qwen3.8-27b) executing volatile, volatile chat sessions directly down to your workspace without local proxy latency.
+- 🎛️ **Dynamic RegEx Variable Infiltration:** Automated token detection engine parsing double curly braces `{{variable}}` syntax to dynamically render contextual schema input fields on the fly before compiling into plain-text instructions.
+- 🪐 **Volatile Global Live Chat Interface:** Independent, stateless standalone chat dashboard pulling incoming target URLs dynamically to auto-trigger immediate AI processing, running fluid conversational memory arrays out-of-the-box.
+- 🔐 **Granular Release Controls:** Secure toggle mechanics keeping proprietary commercial scripts locked inside private database slots or deploying open-source releases to the global discoverable feed.
+- 📋 **Typed Comma-Separated Tag Arrays:** Strict string-to-array ingestion pipeline instantly splitting tag matrices on form submission, bound under a rigorous `z.string()` Zod runtime structure.
+- 🛡️ **Intelligent Redirect Memory Funnel:** Non-authenticated workflow interception storing client navigation tracks and routing users back natively to their intended action vector right after sign-in.
+- 📱 **SaaS Luxury Aesthetics & Bounding:** High-tech dark mode grid modules, glassmorphism layout arrays, and fully responsive fluid view ports supporting device profiles down to 320px screens.
 
 # 📦 Dependencies
 ```json
@@ -41,7 +41,7 @@ PromptShare Hub is an ultra-modern, professional SaaS prompt engineering workspa
 
 ### 1️⃣ Clone the repository
 ```bash
-git clone https://github.com.git
+git clone https://github.com
 ```
 
 ### 2️⃣ Navigate to the project directory
@@ -75,7 +75,7 @@ http://localhost:3000
 
 📧 **Email:** muhammadalamin809@gmail.com
 🌐 **Portfolio:** https://md-alamin-portfolio.vercel.app
-💼 **LinkedIn:** https://linkedin.com/in/md-al-amin-60aa32219
+💼 **LinkedIn:** https://linkedin.com/in/md-al-amin-dev
 
 ## ⭐ Support
 If you found this project helpful, please consider giving it a **⭐ Star** on GitHub.

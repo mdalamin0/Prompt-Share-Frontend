@@ -14,7 +14,6 @@ export default function ProfilePage() {
   if (!user) return null;
 
   return (
-    <>
       <section className="page-section w-full min-h-screen block animate-fade-in">
         <div className="container-app px-4 sm:px-6 mx-auto max-w-5xl">
           {/* Top Page Header Panel */}
@@ -57,6 +56,5 @@ export default function ProfilePage() {
           </div>
         </div>
       </section>
-    </>
   );
 }

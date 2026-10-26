@@ -53,6 +53,9 @@ const form = useForm({
     tags: initialData?.tags ? initialData.tags.join(", ") : "",
     isPublic: initialData?.isPublic ?? true,
   } as Omit<IPromptFormData, "tags"> & { tags: string },
+  validators: {
+    onSubmit: createPromptValidationSchema,
+  },
   onSubmit: async ({ value }) => {
     const cleanTagsArray =
       typeof value.tags === "string" && value.tags.trim() !== ""
@@ -68,14 +71,14 @@ const form = useForm({
       template: value.template,
       category: value.category as categoryType,
       isPublic: value.isPublic,
-      tags: cleanTagsArray,
+      tags: cleanTagsArray, 
     });
 
-     form.reset();
-
-     setDetectedVariables([]);
+    form.reset();
+    setDetectedVariables([]);
   },
 });
+
 
 
   const handleTemplateChange = (
@@ -197,6 +200,7 @@ const form = useForm({
                   placeholder="Describe the utility of this model..."
                   className="h-11 pl-4"
                 />
+                <FieldError errors={field.state.meta.errors} />
               </Field>
             )}
           </form.Field>
@@ -224,6 +228,7 @@ const form = useForm({
                   placeholder="Act as a Senior {{role}} Developer. Analyze {{code}}."
                   className="w-full min-h-[140px] p-4 bg-muted/30 border border-border font-mono text-xs text-muted-foreground focus:outline-none focus:ring-1 focus:ring-primary leading-relaxed rounded-none"
                 />
+                <FieldError errors={field.state.meta.errors} />
 
                 <div className="p-4 bg-secondary/20 border border-border mt-3 rounded-none">
                   <div className="flex items-center gap-1.5 mb-2">

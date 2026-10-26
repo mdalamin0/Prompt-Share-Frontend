@@ -16,9 +16,9 @@ export const userRoutes = [
     href: "/dashboard/user/profile",
     icon: User,
   },
-  {
-    name: "Settings",
-    href: "/dashboard/user/settings",
-    icon: Settings,
-  },
+  // {
+  //   name: "Settings",
+  //   href: "/dashboard/user/settings",
+  //   icon: Settings,
+  // },
 ];

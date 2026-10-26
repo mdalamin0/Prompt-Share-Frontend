@@ -14,6 +14,7 @@ import {
   LayoutDashboard,
   Info,
   HelpCircle,
+  ChartBar,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "../shared/Logo";
@@ -41,6 +42,7 @@ export default function Navbar() {
   const baseLinks = [
     { name: "Home", href: "/", icon: Home },
     { name: "Explore Prompts", href: "/prompts", icon: Terminal },
+    { name: "Live Chat", href: "/prompts/live-chat", icon: ChartBar },
     { name: "Faq", href: "/faq", icon: HelpCircle }
   ];
 

@@ -7,6 +7,7 @@ export const usePublicPrompts = (params: PromptParams) => {
     queryKey: ["prompts", params],
     queryFn: () => getAllPublicPrompts(params),
     staleTime: 5 * 60 * 1000, 
+    retry: false
   });
 };
 
