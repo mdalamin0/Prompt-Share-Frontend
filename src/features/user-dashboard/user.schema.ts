@@ -6,5 +6,5 @@ export const createPromptValidationSchema = z.object({
   template: z.string().min(1, "Template is required"),
   category: z.enum(["code", "text", "image"]),
   isPublic: z.boolean(),
-  tags: z.array(z.string()).optional(),
+  tags: z.string(),
 });
