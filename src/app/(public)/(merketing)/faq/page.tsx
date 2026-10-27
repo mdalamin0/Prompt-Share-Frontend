@@ -67,8 +67,8 @@ export default function PublicFaqPage() {
         <BackgroundDecoration />
       </div>
 
-      <div className="container-app  pt-8 sm:pt-12 pb-24 relative z-10">
-        <div className="flex flex-col sm:flex-row sm:items-center items-start gap-3 mb-8 w-full page-section">
+      <div className="container-app  pt-8  pb-24 relative z-10">
+        <div className="flex flex-col sm:flex-row sm:items-center items-start gap-3 mb-8 w-full ">
           <Button
             variant="outline"
             size="icon"

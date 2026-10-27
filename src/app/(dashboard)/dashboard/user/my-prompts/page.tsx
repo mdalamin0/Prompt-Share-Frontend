@@ -46,6 +46,14 @@ const MyPromptsPage = () => {
   } = useMyPrompts(queryParams);
 
   const prompts = promptsResponse?.data?.data ?? [];
+  const meta = promptsResponse?.data?.meta ?? {
+    page: 1,
+    limit: 9,
+    total: 0,
+  };
+
+   const start = (meta.page - 1) * meta.limit + 1;
+   const end = Math.min(meta.page * meta.limit, meta.total);
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
@@ -87,6 +95,19 @@ const MyPromptsPage = () => {
               onValueChange={handleCategoryChange}
               items={categoryTabs}
             />
+          </div>
+          <div className="mb-6 flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Showing{" "}
+              <span className="font-semibold text-foreground">
+                {start}–{end}
+              </span>{" "}
+              of{" "}
+              <span className="font-semibold text-foreground">
+                {meta.total}
+              </span>{" "}
+              gears
+            </p>
           </div>
 
           {promptsLoading ? (

@@ -3,7 +3,7 @@
 import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { X, LogOut } from "lucide-react";
+import { X, LogOut, Home, Terminal } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import Logo from "@/components/shared/Logo";
 import { UserRoleType } from "@/features/auth/auth.types";
@@ -64,6 +64,28 @@ export default function DashboardSidebar({
               </Button>
             );
           })}
+        </div>
+        <div className="border-t border-border pt-4">
+          <Button
+            variant={"ghost"}
+            nativeButton={false}
+            render={<Link href="/" />}
+            onClick={onClose}
+            className={`w-full justify-start flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all text-muted-foreground hover:text-foreground`}
+          >
+            <Home size={18} />
+            Back to Home
+          </Button>
+          <Button
+            variant={"ghost"}
+            nativeButton={false}
+            render={<Link href="/prompts" />}
+            onClick={onClose}
+            className={`w-full justify-start flex items-center gap-3 px-4 py-2.5 text-sm font-medium transition-all text-muted-foreground hover:text-foreground`}
+          >
+            <Terminal size={18} />
+            Explore Prompts
+          </Button>
         </div>
       </div>
 

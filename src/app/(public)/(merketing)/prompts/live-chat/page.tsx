@@ -1,12 +1,12 @@
 "use client";
 
-import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { ArrowLeft, Terminal, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import LiveChatInterface from "@/features/prompts/components/LiveChatInterface";
+import Link from "next/link";
+import ThemeToggle from "@/components/shared/ThemeToggle";
 export default function GlobalLiveChatPage() {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const initialPromptContext = searchParams.get("prompt") || "";
 
@@ -18,7 +18,8 @@ export default function GlobalLiveChatPage() {
           <Button
             variant="outline"
             size="icon"
-            onClick={() => router.back()}
+           nativeButton={false}
+            render={<Link href="/" />}
             className="size-9 border-border bg-background text-muted-foreground hover:text-foreground shrink-0"
           >
             <ArrowLeft size={16} />
@@ -32,8 +33,11 @@ export default function GlobalLiveChatPage() {
             </p>
           </div>
         </div>
+        <div className="flex items-center gap-2">
+        <ThemeToggle/>
         <div className="hidden text-[10px] font-mono text-muted-foreground uppercase tracking-widest font-semibold sm:flex items-center gap-1 bg-secondary px-2.5 py-1 rounded-lg border border-border/20">
           <Terminal size={12} /> Live Console
+        </div>
         </div>
       </header>
 
