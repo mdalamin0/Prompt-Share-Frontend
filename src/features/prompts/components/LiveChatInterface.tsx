@@ -190,9 +190,9 @@ export default function LiveChatInterface({
                   <button
                   type="button"
                     onClick={() => handleCopyText(msg.text)}
-                    className="self-start mt-0.5 p-1 text-muted-foreground hover:text-foreground opacity-0 group-hover:opacity-100 transition-opacity rounded-md border border-transparent hover:border-border/40 hover:bg-muted/50"
+                    className="self-start mt-0.5 p-1.5 text-muted-foreground hover:text-foreground transition-opacity rounded-full border border-transparent hover:border-border/40 hover:bg-muted/50"
                   >
-                    <Copy size={12} />
+                    <Copy size={14} />
                   </button>
                 )}
               </div>

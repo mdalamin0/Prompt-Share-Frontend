@@ -7,7 +7,7 @@ import { Button } from "@/components/ui/button";
 export default function Hero() {
   return (
     <section className="container-app max-w-5xl mx-auto pt-16 sm:pt-24 pb-12 text-center px-4 relative z-10">
-      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary text-primary border border-border/40 text-[10px] font-bold uppercase tracking-widest rounded-full mb-6">
+      <div className="inline-flex items-center gap-1.5 px-3 py-1 bg-secondary text-primary border border-border/40 text-[10px] font-bold uppercase tracking-widest rounded-full mt-6 sm:mt-0  mb-6">
         <Sparkles size={11} /> The Prompt Engineers Network
       </div>
 

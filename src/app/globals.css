@@ -142,7 +142,7 @@
   }
 
   .page-section {
-    @apply py-6;
+    @apply py-16 sm:py-24;
   }
 
   .page-header {

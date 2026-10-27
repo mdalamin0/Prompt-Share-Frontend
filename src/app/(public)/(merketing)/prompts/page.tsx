@@ -29,7 +29,7 @@ export default function ExplorePromptsPage() {
 
   const queryParams = {
     page,
-    limit: 10,
+    limit: 9,
     sortBy,
     sortOrder: "desc" as const,
     ...(tab === "ALL" ? {} : { category: tab }),
@@ -44,6 +44,13 @@ export default function ExplorePromptsPage() {
   } = usePublicPrompts(queryParams);
 
   const prompts = promptsResponse?.data?.data ?? [];
+  const meta = promptsResponse?.data?.meta ?? {
+    page: 1,
+    limit: 9,
+    total: 0,
+  };
+   const start = (meta.page - 1) * meta.limit + 1;
+   const end = Math.min(meta.page * meta.limit, meta.total);
 
   const handleSearchChange = (value: string) => {
     setSearch(value);
@@ -56,7 +63,7 @@ export default function ExplorePromptsPage() {
   };
 
   return (
-    <section className="page-section mt-20 w-full min-h-screen block">
+    <section className="page-section  w-full min-h-screen block">
       <div className="container-app ">
         <SectionHeader
           title="Explore AI Models"
@@ -92,6 +99,19 @@ export default function ExplorePromptsPage() {
               items={categoryTabs}
               className="shrink-0"
             />
+          </div>
+          <div className="mb-6 flex items-center justify-between">
+            <p className="text-sm text-muted-foreground">
+              Showing{" "}
+              <span className="font-semibold text-foreground">
+                {start}–{end}
+              </span>{" "}
+              of{" "}
+              <span className="font-semibold text-foreground">
+                {meta.total}
+              </span>{" "}
+              gears
+            </p>
           </div>
 
           {promptsLoading ? (

@@ -1,5 +1,6 @@
 
 import BackgroundDecoration from "@/components/shared/BackroundDecoration";
+import FeaturedPrompts from "@/features/home/components/FeaturedPrompts";
 import Features from "@/features/home/components/Features";
 import Hero from "@/features/home/components/Hero";
 import Stats from "@/features/home/components/Stats";
@@ -14,6 +15,7 @@ export default function HomePage() {
 
       <BackgroundDecoration/>
         <Hero />
+        <FeaturedPrompts/>
         <Stats/>
         <Features />
       </div>
