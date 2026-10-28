@@ -169,10 +169,16 @@ export default function PublicPromptCard({ prompt }: PublicPromptCardProps) {
           </div>
 
           <div className="space-y-1.5 mb-4 w-full min-w-0">
-            <h3 className="text-sm font-black text-foreground truncate group-hover:text-primary transition-colors">
+            <h3
+              title={prompt.title}
+              className="text-sm font-black text-foreground truncate group-hover:text-primary transition-colors"
+            >
               {prompt.title}
             </h3>
-            <p className="text-xs text-muted-foreground line-clamp-2 leading-relaxed break-words">
+            <p
+              title={prompt.description}
+              className="text-xs text-muted-foreground line-clamp-2 leading-relaxed break-words"
+            >
               {prompt.description}
             </p>
           </div>
