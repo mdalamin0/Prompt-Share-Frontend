@@ -89,7 +89,7 @@ export default function ExplorePromptsPage() {
                 className="h-10 w-full sm:w-44 bg-muted/40 border border-border px-3 text-xs font-semibold focus:outline-none focus:ring-1 focus:ring-primary text-foreground rounded-full"
               >
                 <option value="createdAt">Latest Releases</option>
-                <option value="forkCount">Most Popular (Forked)</option>
+                <option value="forkCount">Most Popular</option>
               </select>
             </div>
 

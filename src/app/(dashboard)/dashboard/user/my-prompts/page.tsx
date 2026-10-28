@@ -82,8 +82,8 @@ const MyPromptsPage = () => {
           </Button>
         </div>
 
-        <div className="mt-6 space-y-6">
-          <div className="page-section flex flex-col items-center justify-between gap-4 sm:flex-row">
+        <div className="mt-10 space-y-6">
+          <div className=" flex flex-col items-center justify-between gap-4 sm:flex-row">
             <DataSearch
               value={search}
               onChange={handleSearchChange}
